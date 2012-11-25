@@ -1,0 +1,97 @@
+.container
+    header.jumbotron.masthead
+        .inner
+            h2 Hack #51 Take Control of the Browser History Buttons with HTML5 Session History
+    .row
+        .span-6
+            canvas#mySmile2(width="200",height="200")
+    
+script
+    var mySmile = document.getElementById('mySmile2')
+    var smileCtx = mySmile.getContext('2d');
+
+
+    var makeFace = function(){
+            smileCtx.beginPath();
+            
+            smileCtx.fillStyle = '#F1F42E';
+            smileCtx.arc(100,100,99,0,Math.PI*2); // head
+        
+            smileCtx.stroke();
+            smileCtx.fill();
+    };
+
+    var makeMouth = function(){
+        smileCtx.beginPath();
+        smileCtx.moveTo(170,100);
+        smileCtx.arc(100,100,70,0,Math.PI);   // Mouth
+        smileCtx.stroke();
+    };
+
+    var makeLeftEye = function(){
+
+        smileCtx.beginPath();
+        smileCtx.fillStyle = 'black';
+        smileCtx.moveTo(60, 65);
+        smileCtx.arc(60,65,12,0,Math.PI*2);  // Left eye
+        smileCtx.fill();
+    };
+
+    var makeRightEye = function (){
+        smileCtx.beginPath();
+        smileCtx.fillStyle = 'black';
+        smileCtx.moveTo(140,65);
+        smileCtx.arc(140,65,12,0,Math.PI*2);  // Right eye
+        smileCtx.fill();
+    };
+
+    //set up history
+    
+
+    window.history.pushState('leftEye', 'makeLeftEye');
+    window.history.pushState('rightEye', 'makeRightEye');
+
+    window.history.pushState('mouth', 'makeMouth');
+    window.history.pushState('face', 'makeface');
+    window.addEventListener("popstate", drawStack, false);
+    window.history.pushState('ready', 'letsgo'); 
+
+    
+    var drawStack = function(){
+
+
+    console.log('in stack');
+    console.log(window.history.state);
+    switch(window.history.state)
+        {
+        case 'leftEye':
+          makeLeftEye();
+          break;
+        case 'rightEye':
+          makeRightEye();
+          break;
+        case 'mouth':
+          makeMouth();
+          break;
+        case 'face':
+          makeFace();
+          break;
+        default: break
+
+        }
+
+
+
+    };
+
+
+
+    window.addEventListener("popstate", drawStack, false);
+
+
+
+
+
+
+
+

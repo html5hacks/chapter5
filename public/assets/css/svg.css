@@ -1,0 +1,35 @@
+
+    .head{
+        fill: yellow;
+        stroke: black;
+        stroke-width: 2px;
+        -webkit-transform:translate(300px, 164px);
+        -ms-transform: translate(300px, 164px);
+        }
+    .eye {
+        fill: black;
+        -webkit-transform:translate(210px, 100px);
+        -ms-transform: translate(210px, 100px);
+        }
+        
+    .rightEye {
+        -webkit-transform:translate(380px, 100px);
+        -ms-transform: translate(380px, 100px);
+        }
+        
+    .mouth {
+        stroke: black;
+        fill-opacity: 0;
+        stroke-width: 5px;
+        clip-path: url(#MyClip); 
+        -webkit-transform:translate(0px, 0px);
+        -ms-transform: translate(300px, 160px);
+
+    
+    }
+    .clipBox {
+        width: 600px;
+        height: 100px;
+        -webkit-transform:translate(30px, 200px);
+        -ms-transform: translate(30px, 200px);
+    }

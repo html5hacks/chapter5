@@ -1,0 +1,54 @@
+.container
+    header.jumbotron.masthead
+        .inner
+            h2 Hack #49 Make Any Element on Your Page User-Customizable with Editable Content
+        div.row#editable(contenteditable='true')
+            p  This is a really great book.  I am so glad I am reading it because:
+            ul
+                li it is witty
+                li i am now well informed about HTML5
+                li the authors are all around great guys
+
+
+        div.row
+            p use this button to make your entire document editable or turn it off:
+            p
+                button#makeEdit.btn toggle design mode
+
+            p use this button to show the markup
+            p
+                button#showMarkup.btn show my markup
+
+            p
+                textarea#exportContent(style="height:100px; width: 400px")
+
+
+script
+     
+    var myEdit = document.getElementById('editable');
+
+    var setEditMemory = function(content){
+        localStorage.setItem("myContent", myEdit.innerHTML);
+
+    };
+
+    myEdit.addEventListener('blur',setEditMemory);
+
+    if(localStorage.getItem("myContent")){
+    myEdit.innerHTML = localStorage.getItem("myContent");
+    }
+
+    var button = document.getElementById('makeEdit');
+    button.addEventListener('click', function(e){
+            if(document.designMode === "off"){
+                document.designMode = "on"
+            }else{
+            document.designMode = "off"
+            }
+        });
+
+    var showMarkup = document.getElementById('showMarkup');
+    showMarkup.addEventListener('click', function(e){
+        var str = '<!DOCTYPE HTML><HTML>'+document.documentElement.innerHTML+'</HTML>'
+        document.getElementById('exportContent').value = str;
+        });

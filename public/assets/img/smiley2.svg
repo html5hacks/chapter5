@@ -1,0 +1,55 @@
+<?xml-stylesheet type="text/css" href="/assets/css/svg.css"?>
+
+<svg version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg">
+     
+
+
+  <circle class="head"  r="160" />
+  <circle r="20" class="eye leftEye" />
+  <circle r="20" class="eye rightEye" />
+  <clipPath id="MyClip">
+    <rect class="clipBox" width="100%" height="100%" />
+  </clipPath>
+  <circle cx="300" cy="160" r="120" class="mouth"  />
+  
+  <style>
+  
+    .xhead{
+        fill: yellow;
+        stroke: black;
+        stroke-width: 2px;
+        -webkit-transform:translate(300px, 164px);
+        -ms-transform: translate(300px, 164px);
+        }
+    .xeye {
+        fill: black;
+        -webkit-transform:translate(210px, 100px);
+        -ms-transform: translate(210px, 100px);
+        }
+        
+    .xrightEye {
+        -webkit-transform:translate(380px, 100px);
+        -ms-transform: translate(380px, 100px);
+        }
+        
+    .xmouth {
+        stroke: black;
+        fill-opacity: 0;
+        stroke-width: 5px;
+        clip-path: url(#MyClip); 
+        -webkit-transform:translate(0px, 0px);
+        -ms-transform: translate(300px, 160px);
+
+    
+    }
+    .xclipBox {
+        width: 600px;
+        height: 100px;
+        -webkit-transform:translate(30px, 200px);
+        -ms-transform: translate(30px, 200px);
+    }
+
+ </style>
+</svg>

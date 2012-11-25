@@ -1,0 +1,9 @@
+<svg version="1.1"
+     baseProfile="full"
+     xmlns="http://www.w3.org/2000/svg">
+     
+    <rect x="100" y="0" width="400" height="100"  fill="pink" stroke="black" stroke-width="1" />
+    <circle cx="120" cy="50" r="20" fill="blue" stroke="black" stroke-width="1">
+      <animateMotion path="M 0 0 H 380 Z" dur="3s" repeatCount="indefinite" />
+    </circle>
+  </svg>

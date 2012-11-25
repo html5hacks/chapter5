@@ -1,0 +1,210 @@
+.container
+    header.jumbotron.masthead
+        .inner
+          h2 Hack #46 Make Any Content Draggable Within Your Application
+        .row
+            .span-6(style="display:none")
+                a(href="http://www.bing.com") This is just a link!
+            .span-6(style="display:none")
+                img(src='http://www.w3.org/html/logo/downloads/HTML5_Logo_256.png')
+         .row
+            .span-6.dragTarg(style="display:none")
+         .row(style="display:none")
+            .span-6.dragItems
+                div.red(draggable='true')
+                div.green(draggable='true')
+                div.blue(draggable='true')
+         .row(style="display:none")
+            .span-6.dragTargB
+         .row(style="display:none") 
+            .span-6.dragItemsB
+                div.red(draggable='true')
+                div.green(draggable='true')
+                div.blue(draggable='true')
+         .row
+            .span-6.dragItemsC
+                div.red(draggable='true', data-downloadurl='application/octet-stream:colorRed.txt:this is the color red')
+                div.green(draggable='true', data-downloadurl='application/octet-stream:colorGreen.txt:http://chapter6.boyofgreen.c9.io/assets/test.txt')
+                div.blue(draggable='true', data-downloadurl="application/octet-stream:test.txt:http://thecssninja.com/gmail_dragout/Eadui.ttf")
+        .row
+            textarea#showDrop
+script
+
+    var readData = function(e){
+
+    e.stopPropagation(); // Stops some browsers from redirecting.
+    //e.preventDefault();
+    
+    e.preventDefault();
+    var filelist = e.dataTransfer.files;
+    if(!filelist){ return}
+
+    var filelist = event.dataTransfer.files;
+    
+    if(filelist.length > 0){
+    console.log(filelist);
+
+    var file = filelist[0];
+    
+    
+    
+    var filereader = new FileReader();
+
+    filereader.myTarg = document.getElementById('showDrop');
+    
+    console.log(filereader.readAsText);
+
+    var myData = function(event){this.myTarg.value = this.result};
+
+
+
+    filereader.onloadend = myData;
+
+    filereader.readAsText(file);
+    console.log(filereader);
+    
+
+
+
+    };
+    };
+
+    var showDrop = document.getElementById('showDrop');
+
+    showDrop.addEventListener('dragover', function(e){e.preventDefault()});
+
+    showDrop.addEventListener('drop', readData, false);
+
+    function startDrag3(event){
+        console.log(this.getAttribute("data-downloadurl"));
+        event.dataTransfer.setData("DownloadURL",this.getAttribute("data-downloadurl"))
+    };
+
+
+    var circles3 = document.querySelectorAll('.dragItemsC div');
+
+    for(var i=0;i<circles3.length;i++){
+
+        circles3[i].addEventListener('dragstart', startDrag3, false);
+       // circles3[i].addEventListener('dragend', endDrag2, false);
+        
+    };
+
+
+
+
+
+script
+    function startDrag2(event) {
+        this.style.border = '5px solid pink'; 
+        //event.dataTransfer.setData('text/html', this.innerHTML);
+        event.dataTransfer.setData("text", this.className);
+    };
+
+    function endDrag2(event) {
+       this.style.border = ''; 
+        
+    };
+
+    function hideElement2(event){
+        console.log('hide');
+        //this.style.display = 'none';
+    
+    };
+
+    function dropit(event){
+    event.preventDefault();
+    console.log('test');
+    console.log(event.dataTransfer.getData('text'));
+    this.appendChild(document.querySelector('.dragItemsB .'+event.dataTransfer.getData('text')));
+    this.style.border = '3px solid black';
+    };
+
+
+    var circles2 = document.querySelectorAll('.dragItemsB div');
+
+    for(var i=0;i<circles2.length;i++){
+
+        circles2[i].addEventListener('dragstart', startDrag2, false);
+        circles2[i].addEventListener('dragend', endDrag2, false);
+        
+    }
+    
+    var dragTarg2 = document.querySelector('.dragTargB');
+    dragTarg2.addEventListener('dragenter', function(e){
+        this.style.border = '3px #aaa dashed'});
+
+    dragTarg2.addEventListener('dragleave', function(e){
+        this.style.border = '3px solid black'});
+
+    dragTarg2.addEventListener('dragover', function(e){e.preventDefault()});
+
+    dragTarg2.addEventListener('drop', dropit, false);
+
+script
+    function startDrag(event) {
+        this.style.backgroundColor = 'pink';  
+    }
+
+    var circles = document.querySelectorAll('.dragItems div');
+
+    for(var i=0;i<circles.length;i++){
+       // circles[i].addEventListener('dragstart', startDrag, false);
+        console.log(this);
+    }
+    
+    var dragTarg = document.querySelector('.dragTarg');
+    //dragTarg.addEventListener('dragenter', function(e){this.style.border = '3px #aaa dashed';console.log('over')});
+
+   // dragTarg.addEventListener('dragleave', function(e){this.style.border = ''});
+
+script
+    function startDrag(event) {
+        this.style.border = '5px solid pink';  
+    }
+
+    function endDrag(event) {
+        this.style.display = 'none'; 
+    }
+
+    function hideElement(event){
+        console.log('hide')
+        this.style.display = 'none';
+    
+    };
+
+    var circles = document.querySelectorAll('.dragItems div');
+
+    for(var i=0;i<circles.length;i++){
+        circles[i].addEventListener('dragstart', startDrag, false);
+        circles[i].addEventListener('dragend', endDrag, false);
+
+        
+    }
+    
+    var dragTarg = document.querySelector('.dragTarg');
+    dragTarg.addEventListener('dragenter', function(e){
+        this.style.border = '3px #aaa dashed'});
+
+    dragTarg.addEventListener('dragleave', function(e){
+        this.style.border = ''});
+
+    
+
+
+
+style
+    body{ -ms-user-select:none}
+    .dragItems div, .dragItemsB div , .dragItemsC div{ min-height:30px; min-width: 30px; border-radius: 50px; height:100px; width:100px; display:inline-block; border:2px solid #000; margin: 15px; cursor: move; font-size: 4em}
+    .red {background-color: red}
+    .green {background-color: green}
+    .blue {background-color: blue}
+    [draggable] {
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      min-height: 10px;
+    }
+    .dragTarg, .dragTargB {height: 150px;width: 100px; background: #eee; border: 3px solid black; border-radius: 0 0 10px 10px;};
